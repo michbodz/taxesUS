@@ -3,6 +3,8 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,24 +18,42 @@ public class MainController implements Initializable {
 	private ComboBox products;
 	@FXML
 	private ComboBox country;
+	
+	ObservableList<String> categoryList = FXCollections.observableArrayList(
+		        "Groceries",
+		        "Prepared food",
+		        "Prescritpion drug",
+		        "Non-Prescritpion drug",
+		        "Clothing");
+	
+	ObservableList<String> productList = FXCollections.observableArrayList(
+	        "Apple",
+	        "Orange",
+	        "Banana");
+	
+	ObservableList<String> stateList = FXCollections.observableArrayList(
+	        "Floryda",
+	        "California");
 
 	@Override
-	public void initialize(final URL location, final ResourceBundle resources) {
-		System.out.println("initialize(). jest git.");
+	public void initialize(final URL location, final ResourceBundle resources) {		
+		categories.setItems(categoryList);
+		products.setItems(productList);
+		country.setItems(stateList);
 	}
 	
 	
 	 @FXML
 	 private void onCategorySelected(ActionEvent event) {
-		 System.out.println("Wybrano kategorie.");
+		 //System.out.println("Wybrano kategorie.");
 	 }
 	 @FXML
 	 private void onProductSelected(ActionEvent event) {
-		 System.out.println("Wybrano produkt.");
+		 //System.out.println("Wybrano produkt.");
 	 }
 	 @FXML
 	 private void onCountrySelected(ActionEvent event) {
-		 System.out.println("Wybrano stan.");
+		 //System.out.println("Wybrano stan.");
 	 }
 
 }
