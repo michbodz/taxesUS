@@ -14,8 +14,8 @@ public class Main extends Application {
 		try {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-	        Scene scene = new Scene(root, 800, 300);
-	        primaryStage.setTitle("FXML Welcome");
+	        Scene scene = new Scene(root, 600, 200);
+	        primaryStage.setTitle("Sales taxes in the United States");
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 
