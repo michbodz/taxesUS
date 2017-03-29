@@ -1,23 +1,19 @@
 package application.view;
 
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.*;
-
 import application.model.Category;
 import application.model.Product;
 import application.model.State;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-<<<<<<< HEAD
-=======
+
 import javafx.scene.control.Label;
->>>>>>> 075110201bc97e94b48759469cf478c32d95f445
+
 import javafx.scene.control.TextField;
+
+import java.net.URL;
+import java.util.*;
 
 public class MainController implements Initializable {
 
@@ -28,13 +24,12 @@ public class MainController implements Initializable {
 	@FXML
 	private ComboBox<State> country;
 	@FXML
-<<<<<<< HEAD
-=======
+
 	private Label bruttoLabel;
 	@FXML
 	private Label taxLabel;
 	@FXML
->>>>>>> 075110201bc97e94b48759469cf478c32d95f445
+
 	private TextField nettoPrice;
 
 	private List<Product> productsList = createProduct();
@@ -66,7 +61,7 @@ public class MainController implements Initializable {
 				
 				double netto = Double.parseDouble(nettoPrice.getText());
 				taxLabel.setText(currentTax + "% podatku");
-				bruttoLabel.setText(netto+(netto*currentTax/100) +" z³");
+				bruttoLabel.setText(netto+(netto*currentTax/100) +" z?");
 				
 			}
 		});
