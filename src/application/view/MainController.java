@@ -120,8 +120,9 @@ public class MainController implements Initializable {
 		 
 		 currentTax = (int)currentState.getTaxes().get(currentCategory);
 		 taxLabel.setText(currentTax + "% podatku");
-		 
-		 calculateBruttoPrice();
+		 if(nettoPrice.getText().length() > 0) {
+			 calculateBruttoPrice();
+		 }
 	 }
 
 }
