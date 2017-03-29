@@ -11,9 +11,15 @@ public class ProductFiltering {
 	Category category;
 
 	@Test
-	public void test() {
+	public void testGROCERIES() {
 		Product apple = new Product(Category.GROCERIES, "apple", 1);
 		assert(apple.getCategory().equals(category.GROCERIES));
+	}
+	
+	@Test
+	public void testNotGROCERIES() {
+		Product apple = new Product(Category.GROCERIES, "apple", 1);
+		assertFalse(apple.getCategory().equals(category.CLOTHING));
 	}
 
 }
