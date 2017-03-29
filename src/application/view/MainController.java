@@ -13,6 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+<<<<<<< HEAD
+=======
+import javafx.scene.control.Label;
+>>>>>>> 075110201bc97e94b48759469cf478c32d95f445
 import javafx.scene.control.TextField;
 
 public class MainController implements Initializable {
@@ -24,9 +28,19 @@ public class MainController implements Initializable {
 	@FXML
 	private ComboBox<State> country;
 	@FXML
+<<<<<<< HEAD
+=======
+	private Label bruttoLabel;
+	@FXML
+	private Label taxLabel;
+	@FXML
+>>>>>>> 075110201bc97e94b48759469cf478c32d95f445
 	private TextField nettoPrice;
 
 	private List<Product> productsList = createProduct();
+	private State currentState;
+	private Category currentCategory;
+	private int currentTax;
 	
 //	ObservableList<String> categoryList = FXCollections.observableArrayList(
 //		        Category.GROCERIES.getLabel(),
@@ -46,16 +60,29 @@ public class MainController implements Initializable {
 
 		country.getItems().addAll(createState());
 		country.setDisable(true);
+		
+		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(nettoPrice.getText().length() > 0) {
+				
+				double netto = Double.parseDouble(nettoPrice.getText());
+				taxLabel.setText(currentTax + "% podatku");
+				bruttoLabel.setText(netto+(netto*currentTax/100) +" z³");
+				
+			}
+		});
 	}
 	
 	private List<State> createState(){
+		State alabama;
 		HashMap hashMap = new HashMap<Category, Double>();
 		hashMap.put(Category.GROCERIES, 4);
 		hashMap.put(Category.PREPARED_FOOD, 5);
 		hashMap.put(Category.CLOTHING, 6);
 		hashMap.put(Category.NON_PRESCRIPTION_DRUG, 7);
 		hashMap.put(Category.PRESCRIPTION_DRUG, 8);
-		return new ArrayList<State>(Arrays.asList(new State("Alabama", hashMap)));
+		alabama = new State("Alabama", hashMap);
+		
+		return new ArrayList<State>(Arrays.asList(alabama));
 	}
 
 	private List<Product> createProduct(){
@@ -73,13 +100,17 @@ public class MainController implements Initializable {
 	}
 	 @FXML
 	 private void onCategorySelected(ActionEvent event) {
-		 Category  c =  categories.getSelectionModel().getSelectedItem();
+		 currentCategory =  categories.getSelectionModel().getSelectedItem();
 		 products.setDisable(false);
 		 country.setDisable(false);
-		 System.out.println("Wybrano kategorie. " + c);
+		 System.out.println("Wybrano kategorie. " + currentCategory);
 		 products.getItems().clear();
-		 products.getItems().addAll(findProduct(c));
-
+		 products.getItems().addAll(findProduct(currentCategory));
+		 
+		 if(currentState != null) {
+			 currentTax = (int)currentState.getTaxes().get(currentCategory);
+			 taxLabel.setText(currentTax + "% podatku");
+		 }
 	 }
 	 @FXML
 	 private void onProductSelected(ActionEvent event) {
@@ -88,8 +119,10 @@ public class MainController implements Initializable {
 	 }
 	 @FXML
 	 private void onCountrySelected(ActionEvent event) {
-		 //System.out.println("Wybrano stan.");
-
+		 currentState = country.getSelectionModel().getSelectedItem();
+		 
+		 currentTax = (int)currentState.getTaxes().get(currentCategory);
+		 taxLabel.setText(currentTax + "% podatku");
 	 }
 
 }

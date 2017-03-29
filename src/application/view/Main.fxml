@@ -23,8 +23,8 @@
       <VBox alignment="CENTER" maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="10.0">
          <children>
             <TextField fx:id="nettoPrice" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-            <Label text="15.5 % podatku" />
-            <Label text="2 300 zł" />
+            <Label fx:id="taxLabel" text="" />
+            <Label fx:id="bruttoLabel" text="" />
          </children>
       </VBox>
    </children>

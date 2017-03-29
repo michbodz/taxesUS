@@ -21,4 +21,11 @@ public class State {
     public String toString() {
         return name;
     }
+
+	public HashMap getTaxes() {
+		return taxes;
+	}
+
+    
+    
 }
