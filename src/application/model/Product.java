@@ -8,6 +8,7 @@ package application.model;
 public class Product {
     Category category;
     String name;
+    float price;
 
     public Category getCategory() {
         return category;
@@ -16,10 +17,15 @@ public class Product {
     public String getName() {
         return name;
     }
+    
+    public float getPrice(){
+    	return price;
+    }
 
-    public Product(Category category, String name) {
+    public Product(Category category, String name, float price) {
         this.category = category;
         this.name = name;
+        this.price = price;
     }
 
     @Override

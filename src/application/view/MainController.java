@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class MainController implements Initializable {
 
@@ -22,6 +23,8 @@ public class MainController implements Initializable {
 	private ComboBox<Product> products;
 	@FXML
 	private ComboBox<State> country;
+	@FXML
+	private TextField nettoPrice;
 
 	private List<Product> productsList = createProduct();
 	
@@ -56,7 +59,7 @@ public class MainController implements Initializable {
 	}
 
 	private List<Product> createProduct(){
-		return new ArrayList<>(Arrays.asList(new Product(Category.GROCERIES, "apple"),new Product(Category.CLOTHING, "dressle")));
+		return new ArrayList<>(Arrays.asList(new Product(Category.GROCERIES, "apple", 5),new Product(Category.CLOTHING, "dressle", 20)));
 	}
 
 	private List<Product> findProduct(Category category){
@@ -81,6 +84,7 @@ public class MainController implements Initializable {
 	 @FXML
 	 private void onProductSelected(ActionEvent event) {
 		 //System.out.println("Wybrano produkt.");
+		 nettoPrice.setText(Float.toString(products.getValue().getPrice()));
 	 }
 	 @FXML
 	 private void onCountrySelected(ActionEvent event) {
