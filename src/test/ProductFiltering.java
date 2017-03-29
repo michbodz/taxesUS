@@ -12,7 +12,7 @@ public class ProductFiltering {
 
 	@Test
 	public void test() {
-		Product apple = new Product(Category.GROCERIES, "apple");
+		Product apple = new Product(Category.GROCERIES, "apple", 1);
 		assert(apple.getCategory().equals(category.GROCERIES));
 	}
 
