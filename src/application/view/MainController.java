@@ -58,13 +58,15 @@ public class MainController implements Initializable {
 		
 		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(nettoPrice.getText().length() > 0) {
-				
-				double netto = Double.parseDouble(nettoPrice.getText());
-				taxLabel.setText(currentTax + "% podatku");
-				bruttoLabel.setText(netto+(netto*currentTax/100) +" z?");
-				
+				calculateBruttoPrice();
 			}
 		});
+	}
+	
+	private void calculateBruttoPrice() {
+		double netto = Double.parseDouble(nettoPrice.getText());
+		taxLabel.setText(currentTax + "% podatku");
+		bruttoLabel.setText(netto+(netto*currentTax/100) +" zl");
 	}
 	
 	private List<State> createState(){
@@ -118,6 +120,8 @@ public class MainController implements Initializable {
 		 
 		 currentTax = (int)currentState.getTaxes().get(currentCategory);
 		 taxLabel.setText(currentTax + "% podatku");
+		 
+		 calculateBruttoPrice();
 	 }
 
 }
