@@ -81,7 +81,26 @@ public class MainController implements Initializable {
 	}
 
 	private List<Product> createProduct(){
-		return new ArrayList<>(Arrays.asList(new Product(Category.GROCERIES, "apple", 5),new Product(Category.CLOTHING, "dressle", 20)));
+		return new ArrayList<>(Arrays.asList(new Product(Category.GROCERIES, "apple", 5),
+				new Product(Category.GROCERIES, "pear", 4),
+				new Product(Category.GROCERIES, "banana", 3),
+				new Product(Category.GROCERIES, "pineapple", 7),
+				new Product(Category.PREPARED_FOOD, "spaghetti", 12),
+				new Product(Category.PREPARED_FOOD, "chicken soup", 10),
+				new Product(Category.PREPARED_FOOD, "pancakes", 9),
+				new Product(Category.PREPARED_FOOD, "cheeseburger", 7),
+				new Product(Category.CLOTHING, "T-shirt", 5),
+				new Product(Category.CLOTHING, "jacket", 20),
+				new Product(Category.CLOTHING, "dress", 45),
+				new Product(Category.CLOTHING, "jumper", 30),
+				new Product(Category.NON_PRESCRIPTION_DRUG, "Aspirin", 7),
+				new Product(Category.NON_PRESCRIPTION_DRUG, "Antidol 15", 9),
+				new Product(Category.NON_PRESCRIPTION_DRUG, "Cholinex", 5),
+				new Product(Category.NON_PRESCRIPTION_DRUG, "Verdin", 4),
+				new Product(Category.PRESCRIPTION_DRUG, "ADRENALINE",8),
+				new Product(Category.PRESCRIPTION_DRUG, "DIAZEPAM",5),
+				new Product(Category.PRESCRIPTION_DRUG, "INSULIN",4),
+				new Product(Category.PRESCRIPTION_DRUG, "OSELTAMIVIR",6)));
 	}
 
 	private List<Product> findProduct(Category category){
