@@ -70,7 +70,7 @@ public class MainController implements Initializable {
 	}
 	
 	private List<State> createState(){
-		State alabama;
+		State alabama, hawaii, mississippi, texas, oklahoma;
 		HashMap hashMap = new HashMap<Category, Double>();
 		hashMap.put(Category.GROCERIES, 4);
 		hashMap.put(Category.PREPARED_FOOD, 5);
@@ -79,7 +79,41 @@ public class MainController implements Initializable {
 		hashMap.put(Category.PRESCRIPTION_DRUG, 8);
 		alabama = new State("Alabama", hashMap);
 		
-		return new ArrayList<State>(Arrays.asList(alabama));
+		HashMap hashMap2 = new HashMap<Category, Double>();
+		hashMap2.put(Category.GROCERIES, 5);
+		hashMap2.put(Category.PREPARED_FOOD, 5);
+		hashMap2.put(Category.CLOTHING, 5);
+		hashMap2.put(Category.NON_PRESCRIPTION_DRUG, 5);
+		hashMap2.put(Category.PRESCRIPTION_DRUG, 5);
+		hawaii = new State("Hawaii", hashMap2);
+		
+		HashMap hashMap3 = new HashMap<Category, Double>();
+		hashMap3.put(Category.GROCERIES, 7);
+		hashMap3.put(Category.PREPARED_FOOD, 7);
+		hashMap3.put(Category.CLOTHING, 7);
+		hashMap3.put(Category.NON_PRESCRIPTION_DRUG, 7);
+		hashMap3.put(Category.PRESCRIPTION_DRUG, 7);
+		mississippi = new State("Mississippi", hashMap3);	
+		
+		HashMap hashMap4 = new HashMap<Category, Double>();
+		hashMap4.put(Category.GROCERIES, 6);
+		hashMap4.put(Category.PREPARED_FOOD, 8);
+		hashMap4.put(Category.CLOTHING, 6);
+		hashMap4.put(Category.NON_PRESCRIPTION_DRUG, 8);
+		hashMap4.put(Category.PRESCRIPTION_DRUG, 6);
+		texas = new State("Texas", hashMap4);	
+		
+		HashMap hashMap5 = new HashMap<Category, Double>();
+		hashMap5.put(Category.GROCERIES, 4);
+		hashMap5.put(Category.PREPARED_FOOD, 11);
+		hashMap5.put(Category.CLOTHING, 4);
+		hashMap5.put(Category.NON_PRESCRIPTION_DRUG, 11);
+		hashMap5.put(Category.PRESCRIPTION_DRUG, 4);
+		oklahoma = new State("Oklahoma", hashMap5);	
+		
+		
+		
+		return new ArrayList<State>(Arrays.asList(alabama, hawaii, mississippi, texas, oklahoma));
 	}
 
 	private List<Product> createProduct(){
@@ -114,6 +148,9 @@ public class MainController implements Initializable {
 		}
 		return products;
 	}
+	
+	
+	
 	 @FXML
 	 private void onCategorySelected(ActionEvent event) {
 		 currentCategory =  categories.getSelectionModel().getSelectedItem();
