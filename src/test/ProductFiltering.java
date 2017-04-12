@@ -7,6 +7,8 @@ import org.junit.Test;
 import application.model.Category;
 import application.model.Product;
 //Sprawdzenie filtrowania produktów pod wzglêdem kategorii
+
+
 public class ProductFiltering {
 	Category category;
 
