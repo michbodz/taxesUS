@@ -58,7 +58,11 @@ public class MainController implements Initializable {
 		
 		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(nettoPrice.getText().length() > 0) {
-				calculateBruttoPrice();
+				if(isNumeric(nettoPrice.getText())){
+					calculateBruttoPrice();
+				}else{
+					nettoPrice.setText("");
+				}
 			}
 		});
 	}
@@ -197,6 +201,19 @@ public class MainController implements Initializable {
 		 if(nettoPrice.getText().length() > 0) {
 			 calculateBruttoPrice();
 		 }
+	 }
+	 
+	 public static boolean isNumeric(String str)  
+	 {  
+	   try  
+	   {  
+	     double d = Double.parseDouble(str);  
+	   }  
+	   catch(NumberFormatException nfe)  
+	   {  
+	     return false;  
+	   }  
+	   return true;  
 	 }
 
 }
