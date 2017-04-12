@@ -21,8 +21,8 @@ public class MainController implements Initializable {
 	private ComboBox <Category> categories;
 	@FXML
 	private ComboBox<Product> products;
-	@FXML
-	private ComboBox<State> country;
+//	@FXML
+//	private ComboBox<State> country;
 	@FXML
 
 	private Label bruttoLabel;
@@ -53,8 +53,8 @@ public class MainController implements Initializable {
 		products.setDisable(true);
 		products.getItems().addAll(createProduct());
 
-		country.getItems().addAll(createState());
-		country.setDisable(true);
+//		country.getItems().addAll(createState());
+//		country.setDisable(true);
 		
 		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(nettoPrice.getText().length() > 0) {
@@ -177,7 +177,7 @@ public class MainController implements Initializable {
 	 private void onCategorySelected(ActionEvent event) {
 		 currentCategory =  categories.getSelectionModel().getSelectedItem();
 		 products.setDisable(false);
-		 country.setDisable(false);
+//		 country.setDisable(false);
 		 System.out.println("Wybrano kategorie. " + currentCategory);
 		 products.getItems().clear();
 		 products.getItems().addAll(findProduct(currentCategory));
@@ -194,7 +194,7 @@ public class MainController implements Initializable {
 	 }
 	 @FXML
 	 private void onCountrySelected(ActionEvent event) {
-		 currentState = country.getSelectionModel().getSelectedItem();
+//		 currentState = country.getSelectionModel().getSelectedItem();
 		 
 		 currentTax = (int)currentState.getTaxes().get(currentCategory);
 		 taxLabel.setText(currentTax + "% podatku");

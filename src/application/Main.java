@@ -13,7 +13,7 @@ public class Main extends Application {
 		try {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
-	        Scene scene = new Scene(root, 600, 200);
+	        Scene scene = new Scene(root, 600, 400);
 	        primaryStage.setTitle("Sales taxes in the United States");
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
