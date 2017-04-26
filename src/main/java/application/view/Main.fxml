@@ -25,7 +25,6 @@
                <children>
                   <Label text="Podaj cenę brutto" />
                   <TextField fx:id="nettoPrice" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-                  <Label fx:id="bruttoLabel" text="" />
                </children>
             </VBox>
          </children>

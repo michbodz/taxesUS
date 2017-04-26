@@ -25,8 +25,6 @@ public class MainController implements Initializable {
 	@FXML
 	private ComboBox<Product> products;
 	@FXML
-	private Label bruttoLabel;
-	@FXML
 	private TextField nettoPrice;
 	@FXML
 	private TableView<State> table;
