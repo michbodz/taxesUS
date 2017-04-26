@@ -24,7 +24,15 @@ public class TestController {
 	}
 	
 	@Test
-	public void testNumericNegative() {
+	public void testNumericNegativeInt() {
+		MainController tc = new MainController();
+		if(tc.isNumeric("-5")) {
+			fail("To jest liczba ujemna");
+		}	
+	}
+	
+	@Test
+	public void testNumericNegativeDouble() {
 		MainController tc = new MainController();
 		if(tc.isNumeric("-5.00")) {
 			fail("To jest liczba ujemna");
@@ -62,5 +70,6 @@ public class TestController {
 			fail("To jest liczba");
 		}	
 	}
-
+	
+	
 }
