@@ -3,17 +3,21 @@ package application.view;
 import application.model.Category;
 import application.model.Product;
 import application.model.State;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.*;
+
 
 public class MainController implements Initializable {
 
@@ -21,15 +25,20 @@ public class MainController implements Initializable {
 	private ComboBox <Category> categories;
 	@FXML
 	private ComboBox<Product> products;
-//	@FXML
-//	private ComboBox<State> country;
 	@FXML
 	private Label bruttoLabel;
 	@FXML
 	private Label taxLabel;
 	@FXML
 	private TextField nettoPrice;
+	@FXML
+	private TableView<State> table;
+	@FXML
+    private TableColumn<State, String> stateColumn;
+    @FXML
+    private TableColumn<State, String> taxColumn;
 
+    private ObservableList<State> statesList = FXCollections.observableArrayList();
 	private List<Product> productsList = createProduct();
 	private State currentState;
 	private Category currentCategory;
@@ -44,15 +53,10 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(final URL location, final ResourceBundle resources) {
-//		categories.setItems(categoryList);
-
 		this.categories.getItems().setAll(Category.values());
 
 		products.setDisable(true);
 		products.getItems().addAll(createProduct());
-
-//		country.getItems().addAll(createState());
-//		country.setDisable(true);
 		
 		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(nettoPrice.getText().length() > 0) {
@@ -63,6 +67,11 @@ public class MainController implements Initializable {
 				}
 			}
 		});
+		
+		statesList.addAll(createState());
+		stateColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		taxColumn.setCellValueFactory(new PropertyValueFactory<>("currentTax"));
+		table.setItems(statesList);
 	}
 	
 	private void calculateBruttoPrice() {
@@ -112,8 +121,6 @@ public class MainController implements Initializable {
 		hashMap5.put(Category.NON_PRESCRIPTION_DRUG, 11);
 		hashMap5.put(Category.PRESCRIPTION_DRUG, 4);
 		oklahoma = new State("Oklahoma", hashMap5);	
-		
-		
 		
 		return new ArrayList<State>(Arrays.asList(alabama, hawaii, mississippi, texas, oklahoma));
 	}
@@ -175,7 +182,6 @@ public class MainController implements Initializable {
 	 private void onCategorySelected(ActionEvent event) {
 		 currentCategory =  categories.getSelectionModel().getSelectedItem();
 		 products.setDisable(false);
-//		 country.setDisable(false);
 		 System.out.println("Wybrano kategorie. " + currentCategory);
 		 products.getItems().clear();
 		 products.getItems().addAll(findProduct(currentCategory));
@@ -184,22 +190,24 @@ public class MainController implements Initializable {
 			 currentTax = (int)currentState.getTaxes().get(currentCategory);
 			 taxLabel.setText(currentTax + "% podatku");
 		 }
+		 
+		 for (State state : statesList){
+			 state.setCurrentTax((int)state.getTaxes().get(currentCategory));
+		 }
 	 }
 	 @FXML
 	 private void onProductSelected(ActionEvent event) {
-		 //System.out.println("Wybrano produkt.");
 		 nettoPrice.setText(Float.toString(products.getValue().getPrice()));
 	 }
-	 @FXML
-	 private void onCountrySelected(ActionEvent event) {
-//		 currentState = country.getSelectionModel().getSelectedItem();
-		 
+	 
+	 /*@FXML
+	 private void onCountrySelected(ActionEvent event) {		 
 		 currentTax = (int)currentState.getTaxes().get(currentCategory);
 		 taxLabel.setText(currentTax + "% podatku");
 		 if(nettoPrice.getText().length() > 0) {
 			 calculateBruttoPrice();
 		 }
-	 }
+	 }*/
 	 
 	 public static boolean isNumeric(String str)  
 	 {  

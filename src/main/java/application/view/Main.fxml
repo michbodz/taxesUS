@@ -31,11 +31,11 @@
             </VBox>
          </children>
       </HBox>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Stan" />
-            <TableColumn prefWidth="75.0" text="Podatek" />
-          <TableColumn prefWidth="97.0" text="Cena netto" />
+          <TableColumn fx:id="stateColumn" prefWidth="75.0" text="Stan" />
+            <TableColumn fx:id="taxColumn" prefWidth="75.0" text="Podatek" />
+          <TableColumn fx:id="priceColumn" prefWidth="97.0" text="Cena netto" />
         </columns>
       </TableView>
    </children>
