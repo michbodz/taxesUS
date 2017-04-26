@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.util.*;
 
@@ -28,28 +27,18 @@ public class MainController implements Initializable {
 	@FXML
 	private Label bruttoLabel;
 	@FXML
-	private Label taxLabel;
-	@FXML
 	private TextField nettoPrice;
 	@FXML
 	private TableView<State> table;
 	@FXML
-    private TableColumn<State, String> stateColumn;
-    @FXML
-    private TableColumn<State, String> taxColumn;
+	private TableColumn<State, String> stateColumn;
+	@FXML
+	private TableColumn<State, String> taxColumn;
 
-    private ObservableList<State> statesList = FXCollections.observableArrayList();
+	private ObservableList<State> statesList = FXCollections.observableArrayList();
 	private List<Product> productsList = createProduct();
-	private State currentState;
 	private Category currentCategory;
 	private int currentTax;
-	
-//	ObservableList<String> categoryList = FXCollections.observableArrayList(
-//		        Category.GROCERIES.getLabel(),
-//		        Category.PREPARED_FOOD.getLabel(),
-//		        Category.PRESCRIPTION_DRUG.getLabel(),
-//		        Category.NON_PRESCRIPTION_DRUG.getLabel(),
-//		        Category.CLOTHING.getLabel());
 
 	@Override
 	public void initialize(final URL location, final ResourceBundle resources) {
@@ -57,29 +46,28 @@ public class MainController implements Initializable {
 
 		products.setDisable(true);
 		products.getItems().addAll(createProduct());
-		
+
 		nettoPrice.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(nettoPrice.getText().length() > 0) {
 				if(isNumeric(nettoPrice.getText())){
 					calculateBruttoPrice();
-			}else{
+				}else{
 					nettoPrice.setText("");
 				}
 			}
 		});
-		
+
 		statesList.addAll(createState());
 		stateColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		taxColumn.setCellValueFactory(new PropertyValueFactory<>("currentTax"));
 		table.setItems(statesList);
 	}
-	
+
 	private void calculateBruttoPrice() {
 		double netto = Double.parseDouble(nettoPrice.getText());
-		taxLabel.setText(currentTax + "% podatku");
 		bruttoLabel.setText(netto+(netto*currentTax/100) +" zl");
 	}
-	
+
 	private List<State> createState(){
 		State alabama, hawaii, mississippi, texas, oklahoma;
 		HashMap hashMap = new HashMap<Category, Double>();
@@ -89,7 +77,7 @@ public class MainController implements Initializable {
 		hashMap.put(Category.NON_PRESCRIPTION_DRUG, 7);
 		hashMap.put(Category.PRESCRIPTION_DRUG, 8);
 		alabama = new State("Alabama", hashMap);
-		
+
 		HashMap hashMap2 = new HashMap<Category, Double>();
 		hashMap2.put(Category.GROCERIES, 5);
 		hashMap2.put(Category.PREPARED_FOOD, 5);
@@ -97,7 +85,7 @@ public class MainController implements Initializable {
 		hashMap2.put(Category.NON_PRESCRIPTION_DRUG, 5);
 		hashMap2.put(Category.PRESCRIPTION_DRUG, 5);
 		hawaii = new State("Hawaii", hashMap2);
-		
+
 		HashMap hashMap3 = new HashMap<Category, Double>();
 		hashMap3.put(Category.GROCERIES, 7);
 		hashMap3.put(Category.PREPARED_FOOD, 7);
@@ -105,7 +93,7 @@ public class MainController implements Initializable {
 		hashMap3.put(Category.NON_PRESCRIPTION_DRUG, 7);
 		hashMap3.put(Category.PRESCRIPTION_DRUG, 7);
 		mississippi = new State("Mississippi", hashMap3);	
-		
+
 		HashMap hashMap4 = new HashMap<Category, Double>();
 		hashMap4.put(Category.GROCERIES, 6);
 		hashMap4.put(Category.PREPARED_FOOD, 8);
@@ -113,7 +101,7 @@ public class MainController implements Initializable {
 		hashMap4.put(Category.NON_PRESCRIPTION_DRUG, 8);
 		hashMap4.put(Category.PRESCRIPTION_DRUG, 6);
 		texas = new State("Texas", hashMap4);	
-		
+
 		HashMap hashMap5 = new HashMap<Category, Double>();
 		hashMap5.put(Category.GROCERIES, 4);
 		hashMap5.put(Category.PREPARED_FOOD, 11);
@@ -121,7 +109,7 @@ public class MainController implements Initializable {
 		hashMap5.put(Category.NON_PRESCRIPTION_DRUG, 11);
 		hashMap5.put(Category.PRESCRIPTION_DRUG, 4);
 		oklahoma = new State("Oklahoma", hashMap5);	
-		
+
 		return new ArrayList<State>(Arrays.asList(alabama, hawaii, mississippi, texas, oklahoma));
 	}
 
@@ -174,52 +162,36 @@ public class MainController implements Initializable {
 			}
 		}
 		return products;
+	}	
+
+	@FXML
+	private void onCategorySelected(ActionEvent event) {
+		currentCategory =  categories.getSelectionModel().getSelectedItem();
+		products.setDisable(false);
+		System.out.println("Wybrano kategorie. " + currentCategory);
+		products.getItems().clear();
+		products.getItems().addAll(findProduct(currentCategory));
+
+		for (State state : statesList){
+			state.setCurrentTax((int)state.getTaxes().get(currentCategory));
+		}
 	}
-	
-	
-	
-	 @FXML
-	 private void onCategorySelected(ActionEvent event) {
-		 currentCategory =  categories.getSelectionModel().getSelectedItem();
-		 products.setDisable(false);
-		 System.out.println("Wybrano kategorie. " + currentCategory);
-		 products.getItems().clear();
-		 products.getItems().addAll(findProduct(currentCategory));
-		 
-		 if(currentState != null) {
-			 currentTax = (int)currentState.getTaxes().get(currentCategory);
-			 taxLabel.setText(currentTax + "% podatku");
-		 }
-		 
-		 for (State state : statesList){
-			 state.setCurrentTax((int)state.getTaxes().get(currentCategory));
-		 }
-	 }
-	 @FXML
-	 private void onProductSelected(ActionEvent event) {
-		 nettoPrice.setText(Float.toString(products.getValue().getPrice()));
-	 }
-	 
-	 /*@FXML
-	 private void onCountrySelected(ActionEvent event) {		 
-		 currentTax = (int)currentState.getTaxes().get(currentCategory);
-		 taxLabel.setText(currentTax + "% podatku");
-		 if(nettoPrice.getText().length() > 0) {
-			 calculateBruttoPrice();
-		 }
-	 }*/
-	 
-	 public static boolean isNumeric(String str)  
-	 {  
-	   try  
-	   {  
-	     double d = Double.parseDouble(str);  
-	   }  
-	   catch(NumberFormatException nfe)  
-	   {  
-	     return false;  
-	   }  
-	   return true;  
-	 }
+	@FXML
+	private void onProductSelected(ActionEvent event) {
+		nettoPrice.setText(Float.toString(products.getValue().getPrice()));
+	}
+
+	public static boolean isNumeric(String str)  
+	{  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
+	}
 
 }
