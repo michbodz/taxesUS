@@ -22,11 +22,11 @@
             </configuration>
             </plugin>
         </plugins>
-        <testResources>
-            <testResource>
-                <directory>${project.basedir}/src/main/java/test</directory>
-            </testResource>
-        </testResources>
+        <!--<testResources>-->
+            <!--<testResource>-->
+                <!--<directory>${project.basedir}/src/main/java/test</directory>-->
+            <!--</testResource>-->
+        <!--</testResources>-->
     </build>
     <dependencies>
         <dependency>
