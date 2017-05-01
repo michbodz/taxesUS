@@ -63,7 +63,8 @@ public class MainController implements Initializable {
 
 	private void calculateBruttoPrice() {
 		double netto = Double.parseDouble(nettoPrice.getText());
-		bruttoLabel.setText(netto+(netto*currentTax/100) +" zl");
+		//TODO
+//		bruttoLabel.setText(netto+(netto*currentTax/100) +" zl");
 	}
 
 	private List<State> createState(){

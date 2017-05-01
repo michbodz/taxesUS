@@ -7,7 +7,7 @@ import application.model.Category;
 import application.model.State;
 
 
-//testowanie poprawnoúci danych w klasie State.
+//testowanie poprawno≈õci danych w klasie State.
 public class SetDateT {
 	
 	@Test
