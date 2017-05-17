@@ -33,9 +33,9 @@ after_success:
  - git checkout --quiet -f
 ## copy new log files to git repository tree
  - if [ ! -d bld ]; then mkdir bld; fi
- - cp $HOME/taxesUS/rel/bld/*.log bld/
- - if [ ! -d docs ]; then mkdir docs; fi
- - cp $HOME/taxesUS/docs/*.log docs/
+ - cp $HOME/michbodz/taxesUS/jobs/*.log bld/
+ - if [ ! -d jobs ]; then mkdir jobs; fi
+ - cp $HOME/michbodz/taxesUS/jobs/*.log jobs/
 ## commit new log files to GitHub repository
  - git add -f .
  - git commit --quiet -m "Travis CI build $TRAVIS_BUILD_NUMBER (failure) - log files"
