@@ -174,10 +174,13 @@ public class MainController implements Initializable {
 		for (State state : statesList){
 			state.setCurrentTax((int)state.getTaxes().get(currentCategory));
 		}
+		nettoPrice.setText("");
 	}
 	@FXML
 	private void onProductSelected(ActionEvent event) {
-		nettoPrice.setText(Float.toString(products.getValue().getPrice()));
+		if(products.getValue() != null) {
+			nettoPrice.setText(Float.toString(products.getValue().getPrice()));
+		}
 	}
 
 	public static boolean isNumeric(String str)  
