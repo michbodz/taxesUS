@@ -32,6 +32,8 @@ public class MainController implements Initializable {
 	private TableColumn<State, String> stateColumn;
 	@FXML
 	private TableColumn<State, String> taxColumn;
+	@FXML
+	private TableColumn<State, String> priceColumn;
 
 	private ObservableList<State> statesList = FXCollections.observableArrayList();
 	private List<Product> productsList = createProduct();
@@ -58,13 +60,18 @@ public class MainController implements Initializable {
 		statesList.addAll(createState());
 		stateColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		taxColumn.setCellValueFactory(new PropertyValueFactory<>("currentTax"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("currentPrice"));
 		table.setItems(statesList);
 	}
 
 	private void calculateBruttoPrice() {
-		double netto = Double.parseDouble(nettoPrice.getText());
-		//TODO
-//		bruttoLabel.setText(netto+(netto*currentTax/100) +" zl");
+		for (State state : statesList){
+			
+			double brutto = Double.parseDouble(nettoPrice.getText());
+			double podatek = (double)state.getTaxes().get(currentCategory)/100.0;
+			
+			state.setCurrentPrice(Math.round((brutto)/(1+podatek)*100d)/100d);
+		}
 	}
 
 	private List<State> createState(){
@@ -173,6 +180,7 @@ public class MainController implements Initializable {
 
 		for (State state : statesList){
 			state.setCurrentTax((int)state.getTaxes().get(currentCategory));
+			//state.setCurrentPrice((Double.parseDouble(nettoPrice.getText()))/(1+(int)state.getTaxes().get(currentCategory)));
 		}
 		nettoPrice.setText("");
 	}

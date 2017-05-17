@@ -2,7 +2,9 @@ package application.model;
 
 import java.util.HashMap;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,12 +17,14 @@ import javafx.beans.property.StringProperty;
 public class State {
 	StringProperty name;
 	IntegerProperty currentTax;
+	DoubleProperty currentPrice;
 	HashMap taxes =  new HashMap<Category, Double>();
 
 
     public State(String name, HashMap taxes) {
         this.name = new SimpleStringProperty(name);
         this.currentTax = new SimpleIntegerProperty();
+        this.currentPrice = new SimpleDoubleProperty();
         this.taxes = taxes;
     }
 
@@ -55,6 +59,18 @@ public class State {
     
     public IntegerProperty currentTaxProperty() {
 		return currentTax;
+	}
+    
+    public double getCurrentPrice() {
+        return currentPrice.get();
+    }
+    
+    public void setCurrentPrice(double currentPrice) {
+		this.currentPrice.set(currentPrice);
+    }
+    
+    public DoubleProperty currentPriceProperty() {
+		return currentPrice;
 	}
     
 }
