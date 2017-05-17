@@ -16,15 +16,15 @@ import javafx.beans.property.StringProperty;
  */
 public class State {
 	StringProperty name;
-	IntegerProperty currentTax;
 	DoubleProperty currentPrice;
+	DoubleProperty currentTax;
 	HashMap taxes =  new HashMap<Category, Double>();
 
 
     public State(String name, HashMap taxes) {
         this.name = new SimpleStringProperty(name);
-        this.currentTax = new SimpleIntegerProperty();
         this.currentPrice = new SimpleDoubleProperty();
+        this.currentTax = new SimpleDoubleProperty();
         this.taxes = taxes;
     }
 
@@ -49,15 +49,15 @@ public class State {
         return name;
     }
     
-    public int getCurrentTax() {
+    public double getCurrentTax() {
         return currentTax.get();
     }
     
-    public void setCurrentTax(int currentTax) {
+    public void setCurrentTax(double currentTax) {
 		this.currentTax.set(currentTax);
     }
     
-    public IntegerProperty currentTaxProperty() {
+    public DoubleProperty currentTaxProperty() {
 		return currentTax;
 	}
     
