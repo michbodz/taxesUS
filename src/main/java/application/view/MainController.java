@@ -34,6 +34,8 @@ public class MainController implements Initializable {
 	private TableColumn<State, String> taxColumn;
 	@FXML
 	private TableColumn<State, String> priceColumn;
+	@FXML
+	private Label basePrice;
 
 	private ObservableList<State> statesList = FXCollections.observableArrayList();
 	private List<Product> productsList = createProduct();
@@ -187,6 +189,7 @@ public class MainController implements Initializable {
 	private void onProductSelected(ActionEvent event) {
 		if(products.getValue() != null) {
 			nettoPrice.setText(Float.toString(products.getValue().getPrice()));
+			basePrice.setText(Float.toString(products.getValue().getPrice()));
 		}
 	}
 
