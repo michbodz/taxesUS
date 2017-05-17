@@ -70,43 +70,43 @@ public class MainController implements Initializable {
 	private List<State> createState(){
 		State alabama, hawaii, mississippi, texas, oklahoma;
 		HashMap hashMap = new HashMap<Category, Double>();
-		hashMap.put(Category.GROCERIES, 4);
-		hashMap.put(Category.PREPARED_FOOD, 5);
-		hashMap.put(Category.CLOTHING, 6);
-		hashMap.put(Category.NON_PRESCRIPTION_DRUG, 7);
-		hashMap.put(Category.PRESCRIPTION_DRUG, 8);
+		hashMap.put(Category.GROCERIES, 4.5);
+		hashMap.put(Category.PREPARED_FOOD, 5.1);
+		hashMap.put(Category.CLOTHING, 6.2);
+		hashMap.put(Category.NON_PRESCRIPTION_DRUG, 7.5);
+		hashMap.put(Category.PRESCRIPTION_DRUG, 8.9);
 		alabama = new State("Alabama", hashMap);
 
 		HashMap hashMap2 = new HashMap<Category, Double>();
-		hashMap2.put(Category.GROCERIES, 5);
-		hashMap2.put(Category.PREPARED_FOOD, 5);
-		hashMap2.put(Category.CLOTHING, 5);
-		hashMap2.put(Category.NON_PRESCRIPTION_DRUG, 5);
-		hashMap2.put(Category.PRESCRIPTION_DRUG, 5);
+		hashMap2.put(Category.GROCERIES, 5.2);
+		hashMap2.put(Category.PREPARED_FOOD, 5.0);
+		hashMap2.put(Category.CLOTHING, 5.2);
+		hashMap2.put(Category.NON_PRESCRIPTION_DRUG, 5.5);
+		hashMap2.put(Category.PRESCRIPTION_DRUG, 5.2);
 		hawaii = new State("Hawaii", hashMap2);
 
 		HashMap hashMap3 = new HashMap<Category, Double>();
-		hashMap3.put(Category.GROCERIES, 7);
-		hashMap3.put(Category.PREPARED_FOOD, 7);
-		hashMap3.put(Category.CLOTHING, 7);
-		hashMap3.put(Category.NON_PRESCRIPTION_DRUG, 7);
-		hashMap3.put(Category.PRESCRIPTION_DRUG, 7);
+		hashMap3.put(Category.GROCERIES, 7.1);
+		hashMap3.put(Category.PREPARED_FOOD, 7.0);
+		hashMap3.put(Category.CLOTHING, 7.4);
+		hashMap3.put(Category.NON_PRESCRIPTION_DRUG, 7.7);
+		hashMap3.put(Category.PRESCRIPTION_DRUG, 7.2);
 		mississippi = new State("Mississippi", hashMap3);	
 
 		HashMap hashMap4 = new HashMap<Category, Double>();
-		hashMap4.put(Category.GROCERIES, 6);
-		hashMap4.put(Category.PREPARED_FOOD, 8);
-		hashMap4.put(Category.CLOTHING, 6);
-		hashMap4.put(Category.NON_PRESCRIPTION_DRUG, 8);
-		hashMap4.put(Category.PRESCRIPTION_DRUG, 6);
+		hashMap4.put(Category.GROCERIES, 6.8);
+		hashMap4.put(Category.PREPARED_FOOD, 8.0);
+		hashMap4.put(Category.CLOTHING, 6.0);
+		hashMap4.put(Category.NON_PRESCRIPTION_DRUG, 8.1);
+		hashMap4.put(Category.PRESCRIPTION_DRUG, 6.1);
 		texas = new State("Texas", hashMap4);	
 
 		HashMap hashMap5 = new HashMap<Category, Double>();
-		hashMap5.put(Category.GROCERIES, 4);
-		hashMap5.put(Category.PREPARED_FOOD, 11);
-		hashMap5.put(Category.CLOTHING, 4);
-		hashMap5.put(Category.NON_PRESCRIPTION_DRUG, 11);
-		hashMap5.put(Category.PRESCRIPTION_DRUG, 4);
+		hashMap5.put(Category.GROCERIES, 4.3);
+		hashMap5.put(Category.PREPARED_FOOD, 11.9);
+		hashMap5.put(Category.CLOTHING, 4.2);
+		hashMap5.put(Category.NON_PRESCRIPTION_DRUG, 11.3);
+		hashMap5.put(Category.PRESCRIPTION_DRUG, 4.5);
 		oklahoma = new State("Oklahoma", hashMap5);	
 
 		return new ArrayList<State>(Arrays.asList(alabama, hawaii, mississippi, texas, oklahoma));
@@ -172,7 +172,7 @@ public class MainController implements Initializable {
 		products.getItems().addAll(findProduct(currentCategory));
 
 		for (State state : statesList){
-			state.setCurrentTax((int)state.getTaxes().get(currentCategory));
+			state.setCurrentTax((double)state.getTaxes().get(currentCategory));
 		}
 		nettoPrice.setText("");
 	}

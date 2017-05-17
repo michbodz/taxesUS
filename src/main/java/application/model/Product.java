@@ -22,10 +22,10 @@ public class Product {
     	return price;
     }
 
-    public Product(Category category, String name, float price) {
+    public Product(Category category, String name, float d) {
         this.category = category;
         this.name = name;
-        this.price = price;
+        this.price = d;
     }
 
     @Override
