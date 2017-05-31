@@ -18,6 +18,8 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(url);
 	        Scene scene = new Scene(root, 600, 400);
 	        primaryStage.setTitle("Sales taxes in the United States");
+                primaryStage.setMinHeight(400);
+                primaryStage.setMinWidth(400);
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 
