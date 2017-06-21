@@ -32,7 +32,7 @@ after_success: |
     cd "$TRAVIS_BUILD_DIR"
     mkdir web
     cd web
-    cp -r "$TRAVIS_BUILD_DIR"/* /web
+    cp -r "$TRAVIS_BUILD_DIR" .
     git init
     git checkout -b gh-pages
     git add .
