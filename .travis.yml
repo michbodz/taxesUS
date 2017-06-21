@@ -31,8 +31,8 @@ after_success: |
   if [ -n "$GITHUB_OAUTH_TOKEN" ]; then
     cd "$TRAVIS_BUILD_DIR"
     mkdir web
+    cp -r "$TRAVIS_BUILD_DIR" /web/
     cd web
-    cp -r "$TRAVIS_BUILD_DIR" /web
     git init
     git checkout -b gh-pages
     git add .
