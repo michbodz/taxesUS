@@ -30,7 +30,7 @@ after_failure:
 after_success: |
   if [ -n "$GITHUB_OAUTH_TOKEN" ]; then
     cd "$TRAVIS_BUILD_DIR"
-    make web
+    mkdir web
     cd web
     git init
     git checkout -b gh-pages
