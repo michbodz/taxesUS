@@ -6,13 +6,6 @@ notifications:
   email:
     - recipients: klaudia.gluszek@gmail.com
 
-before_script:
-# get clone of GitHub repository to return Travis CI OW build/log files
-# configure Git
- - git config --global user.email "michbodz@gmail.com"
- - git config --global user.name "michbodz"
- - git config --global push.default simple
-
  deploy:
    edge: true
    provider: bluemixcloudfoundry
@@ -23,6 +16,13 @@ before_script:
    manifest: manifest.yml          # (optional)  Defaults to manifest.yml.
    region: eu-gb                        # (optional)  [ng, eu-gb , au-syd] Defaults to US South region (ng).
    api: https://api.ng.bluemix.net
+
+before_script:
+# get clone of GitHub repository to return Travis CI OW build/log files
+# configure Git
+ - git config --global user.email "michbodz@gmail.com"
+ - git config --global user.name "michbodz"
+ - git config --global push.default simple
    
 after_failure:
 ## after failure transfer log files back to GitHub repository
