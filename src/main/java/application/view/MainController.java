@@ -20,6 +20,7 @@ import java.util.*;
 
 public class MainController implements Initializable {
 
+	private static final double marza = 1.07;
 	@FXML
 	private ComboBox <Category> categories;
 	@FXML
@@ -72,7 +73,7 @@ public class MainController implements Initializable {
 			double brutto = Double.parseDouble(nettoPrice.getText());
 			double podatek = (double)state.getTaxes().get(currentCategory)/100.0;
 			
-			state.setCurrentPrice(Math.round((brutto)/(1+podatek)*100d)/100d);
+			state.setCurrentPrice(Math.round(((brutto)/(1+podatek))/marza*100d)/100d);
 		}
 	}
 
@@ -188,8 +189,8 @@ public class MainController implements Initializable {
 	@FXML
 	private void onProductSelected(ActionEvent event) {
 		if(products.getValue() != null) {
-			nettoPrice.setText(Float.toString(products.getValue().getPrice()));
-			basePrice.setText(Float.toString(products.getValue().getPrice()));
+			nettoPrice.setText(Double.toString((products.getValue().getPrice()*marza*100d)/100d));
+			basePrice.setText(Double.toString((products.getValue().getPrice()*marza*100d)/100d));
 		}
 	}
 
