@@ -27,17 +27,17 @@ after_failure:
  - git commit --quiet -m "Travis CI build $TRAVIS_BUILD_NUMBER (failure) - log files"
  - git push --quiet -f origin
 
-after_success:
-## after failure transfer log files back to GitHub repository
- - cd $HOME/taxesUS
- - git checkout --quiet -f
-## copy new log files to git repository tree
- - if [ ! -d bld ]; then mkdir bld; fi
- - cp $HOME/michbodz/taxesUS/jobs/*.log bld/
- - if [ ! -d jobs ]; then mkdir jobs; fi
- - cp $HOME/michbodz/taxesUS/jobs/*.log jobs/
-## commit new log files to GitHub repository
- - git add -f .
- - git commit --quiet -m "Travis CI build $TRAVIS_BUILD_NUMBER (failure) - log files"
- - git push --quiet -f origin
-
+after_success: |
+  if [ -n "$GITHUB_OAUTH_TOKEN" ]; then
+    cd "$TRAVIS_BUILD_DIR"
+    mkdir web
+    cd web
+    git init
+    git checkout -b gh-pages
+    git add .
+    git -c user.name='travis' -c user.email='travis' commit -m init
+    # Make sure to make the output quiet, or else the API token will leak!
+    # This works because the API key can replace your password.
+    git push -f -q https://<michbodz>:$GITHUB_OAUTH_TOKEN@github.com/<michbodz>/<taxexUS>-gh-pages gh-pages &2>/dev/null
+    cd "$TRAVIS_BUILD_DIR"
+  fi
